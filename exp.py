@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 TOKEN = '5389826870:AAHXkptHgOZ-Ohpb81ltkj2eyimgTCWC2jA'
 
-file_to_convert = None
+file_to_convert, file_converted = None, None
 file_type_from, file_type_to = None, None
 user_name = None
 
