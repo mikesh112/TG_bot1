@@ -1,7 +1,7 @@
 import logging
 from telegram.ext import Updater, MessageHandler, Filters
 from telegram.ext import CommandHandler, ConversationHandler
-#from main2 import converting
+# from main2 import converting
 
 
 logging.basicConfig(
@@ -11,11 +11,11 @@ logger = logging.getLogger(__name__)
 
 TOKEN = '5389826870:AAHXkptHgOZ-Ohpb81ltkj2eyimgTCWC2jA'
 
-file_to_convert, file_converted = None, None
+file_to_convert, converted_file = None, None
 file_type_from, file_type_to = None, None
 user_name = None  # without @
 
-#  file_converted = converting(file_to_convert, file_type_to, file_type_from, user_name)
+#  converted_file = converting(file_to_convert, file_type_to, file_type_from, user_name)
 
 
 # a short description of the bot
