@@ -1,7 +1,7 @@
 import logging
 from telegram.ext import Updater, MessageHandler, Filters
 from telegram.ext import CommandHandler, ConversationHandler
-from main2 import converting
+#from main2 import converting
 
 
 logging.basicConfig(
