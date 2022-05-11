@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 
 TOKEN = '5389826870:AAHXkptHgOZ-Ohpb81ltkj2eyimgTCWC2jA'
 
-file_to_convert, file_converted = None, None
+file_to_convert = None
 file_type_from, file_type_to = None, None
-user_name = None
+converted_file = None
 
 
 # a short description of the bot
@@ -40,23 +40,20 @@ def first_response(update, context):
     global file_to_convert
     file_to_convert = context.bot.get_file(update.message.document).download()
     update.message.reply_text("Напиши тип расширение файла без точки с маленькой буквы\n"
-                              "Файлы без расширений мы пока не принимам)\n")
+                              "Файлы без расширений мы пока не принимаем)\n")
     update.message.document(file_to_convert)
     return ConversationHandler.END
 
 
 # conversation 2 start func - gets type file; asks for converting type
 def second_response(update, context):
-
+    global file_type_from
     type = update.message.text
+    file_type_from = type.split('.')[-1]
     logger.info(type)
-    update.message.reply_text("Спасибо за участие в опросе! Всего доброго!")
-    return 3  # Константа, означающая конец диалога.
+    update.message.reply_text(f'Наслаждайтесь: {converted_file}')
+    return 2  # Константа, означающая конец диалога.
     # Все обработчики из states и fallbacks становятся неактивными.
-
-
-# conversation midl func - gets type to convert; converts file; sends file
-def third_response(update, context): pass
 
 
 # conversation end func - says bye
@@ -80,8 +77,7 @@ conv_handler_2 = ConversationHandler(
     entry_points=[MessageHandler(Filters.text, second_response)],
     states={
             1: [MessageHandler(Filters.text & Filters.document & ~Filters.command, first_response)],
-            2: [MessageHandler(Filters.text & Filters.document & ~Filters.command, second_response)],
-            3: [MessageHandler(Filters.text & ~Filters.command, third_response)]
+            2: [MessageHandler(Filters.text & Filters.document & ~Filters.command, second_response)]
         },
     fallbacks=[CommandHandler('stop', stop)]
 )
